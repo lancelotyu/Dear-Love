@@ -92,9 +92,19 @@ function startHeartAnimation() {
 	};
 })(jQuery);
 
+function GetDateDiff(startDate,endDate){  
+    var startTime = new Date(Date.parse(startDate.replace(/-/g,   "/"))).getTime();     
+    var endTime = new Date(Date.parse(endDate.replace(/-/g,   "/"))).getTime();     
+    var dates = Math.abs((startTime - endTime))/(1000*60*60*24);     
+    return  dates;    
+}
+
 function timeElapse(date){
-	var current = Date();
-	var seconds = (Date.parse(current) - Date.parse(date)) / 1000;
+	var current = Date.parse(new Date());
+	var seconds = (current - Date.parse(date)) / 1000;
+	//alert("current:"+current/1000);
+	//alert("开始:"+date/1000);
+	var tt = Date.parse(date)
 	var days = Math.floor(seconds / (3600 * 24));
 	seconds = seconds % (3600 * 24);
 	var hours = Math.floor(seconds / 3600);
@@ -110,7 +120,7 @@ function timeElapse(date){
 	if (seconds < 10) {
 		seconds = "0" + seconds;
 	}
-	var result = "<span class=\"digit\">" + days + "</span> days <span class=\"digit\">" + hours + "</span> hours <span class=\"digit\">" + minutes + "</span> minutes <span class=\"digit\">" + seconds + "</span> seconds"; 
+	var result = "<span class=\"digit\">" + days + "</span> 天 <span class=\"digit\">" + hours + "</span> 小时 <span class=\"digit\">" + minutes + "</span> 分 <span class=\"digit\">" + seconds + "</span> 秒"; 
 	$("#elapseClock").html(result);
 }
 
